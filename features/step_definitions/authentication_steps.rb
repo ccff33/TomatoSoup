@@ -1,9 +1,7 @@
 Given /^I am a( not)? registered user$/ do |not_registered|
-  @user = User.new
-  @user.username = 'smithmachine'
-  @user.first_name = 'Brian'
-  @user.last_name = 'Smith'
-  @user.password = 'test'
+  @password = 'test'
+  @user = User.new(:username => 'smithmachine', :first_name => 'Brian',
+                   :last_name => 'Smith', :password => @password)
   if !not_registered
     @user.save!
   end
@@ -21,8 +19,8 @@ When /submit my registration data$/ do
   fill_in 'Username', :with => @user.username
   fill_in 'First name', :with => @user.first_name
   fill_in 'Last name', :with => @user.last_name
-  fill_in 'Password', :with => @user.password
-  fill_in 'Password confirmation', :with => @user.password
+  fill_in 'Password', :with => @password
+  fill_in 'Password confirmation', :with => @password
   click_button 'Register'
 end 
 
@@ -36,14 +34,10 @@ end
 
 When /submit my login data$/ do 
   fill_in 'Username', :with => @user.username
-  fill_in 'Password', :with => @user.password
+  fill_in 'Password', :with => @password
   click_button 'Login'
 end
 
-# TODO: find out why the $%#@ is not working
-# determine how much time have I spent staring at 2 lines of $%#$ code
-# more of a $#%@
-# what am I doing with my life ???
 Then /^I should( not)? be logged in$/ do |not_logged|
   visit root_path
   if !not_logged
