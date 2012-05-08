@@ -1,27 +1,31 @@
-%h1 Registration
-
-= form_for @user do |f|
-  - if @user.errors.any?
-    .error_messages
-      %h2 The following errors occured:
-      %ul
-        - for message in @user.errors.full_messages
-          %li
-            = message
-  .field
-    = f.label :username
-    = f.text_field :username
-  .field
-    = f.label :first_name
-    = f.text_field :first_name
-  .field
-    = f.label :last_name
-    = f.text_field :last_name
-  .field
-    = f.label :password
-    = f.password_field :password
-  .field
-    = f.label :password_confirmation
-    = f.password_field :password_confirmation
-  .actions
-    = f.submit 'Register'
+.block#block-signup
+  %h2 Registration
+  .content
+    .flash
+      - flash.each do |type, message|
+        %div{:class => "message #{type}"}
+          %p= message
+      - if @user.errors.any?
+        %div{:class => "message alert"}
+          %ul
+            - for message in @user.errors.full_messages
+              %li= message
+    = form_for @user, :html => {:class => "form"} do |f|
+      .group
+        = f.label :username, :class => "label"
+        = f.text_field :username, :class => "text_field"
+      .group
+        = f.label :first_name, :class => "label"
+        = f.text_field :first_name, :class => "text_field"
+      .group
+        = f.label :last_name, :class => "label"
+        = f.text_field :last_name, :class => "text_field"
+      .group
+        = f.label :password, :class => "label"
+        = f.password_field :password, :class => "text_field"
+      .group
+        = f.label :password_confirmation, :class => "label"
+        = f.password_field :password_confirmation, :class => "text_field"
+      .group.navform.wat-cf
+        %button.button{ :type => "submit" }
+          Register

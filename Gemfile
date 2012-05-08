@@ -19,6 +19,7 @@ group :development, :test do
 	gem 'database_cleaner'
 	gem 'capybara'
 	gem 'rspec-rails'
+	gem 'web-app-theme', :git => 'git://github.com/pilu/web-app-theme.git'
 end
 
 group :production do

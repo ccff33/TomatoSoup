@@ -2,13 +2,31 @@
 %html
   %head
     %title Tomato Soup
-    = stylesheet_link_tag    "application", :media => "all"
+    = stylesheet_link_tag 'web_app_theme'
     = javascript_include_tag "application"
-    = csrf_meta_tags
+    = csrf_meta_tag
   %body
-  
-    - flash.each do |name, message|
-      %div{:id => "flash_#{name}"}
-        = message
-
-    = yield
+    %div{:id => "container"}
+      %div{:id => "header"}
+        %h1
+          = link_to "Tomato Soup", root_path 
+        %div{:id => "user-navigation"}
+          %ul{:class => "wat-cf"}
+            - if current_user
+              %li= link_to 'Logout', logout_path
+            - else
+              %li= link_to 'Login', login_path
+              %li= link_to 'Register', register_path
+        %div{:id => "main-navigation"}
+      %div{:id => "wrapper", :class => "wat-cf"}
+        %div{:class => "flash"}
+          - flash.each do |type, message|
+            %div{:class => "message #{type}"}
+              %p= message
+        %div{:id => "main"}
+          = yield
+          %div{:id => "footer"}
+            %div{:class => "block"}
+              %p Copyright &copy;
+        %div{:id => "sidebar"}
+          = yield :sidebar
