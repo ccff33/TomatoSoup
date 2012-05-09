@@ -7,15 +7,8 @@ Given /^I am a( not)? registered user$/ do |not_registered|
   end
 end
 
-When /^I go to (.*)$/ do |page_name|
-  page_path = case page_name
-  when 'the registration page' then register_path
-  when 'the login page' then login_path
-  end
-  visit page_path
-end
-
 When /submit my registration data$/ do
+  visit register_path
   fill_in 'Username', :with => @user.username
   fill_in 'First name', :with => @user.first_name
   fill_in 'Last name', :with => @user.last_name
@@ -26,13 +19,13 @@ end
 
 Then /^I should( not)? be able to login$/ do |not_able|
   steps %Q{
-    When I go to the login page
     When I submit my login data
   }
   step('I should' + (not_able ? ' not ' : ' ') + 'be logged in')
 end 
 
 When /submit my login data$/ do 
+  visit login_path
   fill_in 'Username', :with => @user.username
   fill_in 'Password', :with => @password
   click_button 'Login'

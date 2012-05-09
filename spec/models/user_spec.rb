@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe User do
-    before(:each) do
+  
+  before(:each) do
     @smith = User.new(:username => 'smithmachine',
       :first_name => 'Brian',
       :last_name => 'Smith',
@@ -36,4 +37,11 @@ describe User do
     existing_user.save!
     @smith.should_not be_valid
   end
+  
+  it "should be able to return all it's projects" do
+    @smith.save!
+    5.times{Project.create(:name => 'p1', :description => 'desc', :user_id => @smith.id)}
+    @smith.projects.size.should == 5
+  end
+  
 end

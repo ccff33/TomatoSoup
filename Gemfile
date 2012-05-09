@@ -12,6 +12,7 @@ gem 'jquery-rails'
 gem 'haml-rails'
 gem 'sorcery'
 gem 'bcrypt-ruby'
+gem 'will_paginate'
 
 group :development, :test do
 	gem 'mysql2'
