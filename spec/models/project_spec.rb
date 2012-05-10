@@ -8,7 +8,8 @@ describe Project do
       :last_name => 'Smith',
       :password => 'test')
     @owner.save!
-    @project = Project.new(:name => 'project', :description => 'desc', :user_id => @owner.id)  
+    @project = Project.new(:name => 'project', :description => 'desc')
+    @project.user_id = @owner.id 
   end
   
   it "should belong to a user" do

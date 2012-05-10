@@ -3,8 +3,7 @@ class ProjectsController < ApplicationController
   before_filter :require_login
   
   def index
-    # TODO: check if params[:page] is int
-    @projects = current_user.projects.paginate(:page => params[:page] ||= 1, :per_page => 3)
+    @projects = all_my_projects.paginate(:page => params[:page] ||= 1, :per_page => 3)
   end
 
   def new
@@ -22,15 +21,15 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = current_user.projects.find params[:id]
+    @project = my_project params[:id]
   end
 
   def edit
-    @project = current_user.projects.find params[:id]
+    @project = my_project params[:id]
   end
 
   def update
-    @project = current_user.projects.find params[:id]
+    @project = my_project params[:id]
     if @project.update_attributes(params[:project])
       redirect_to project_path(@project), :notice => 'Project updated'
     else
@@ -39,13 +38,24 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    @project = current_user.projects.find params[:id]
-    if @project.destroy
+    @project = my_project params[:id]
+    @project.archive_flag = true
+    if @project.save
       flash[:notice] = 'Project deleted'
     else
       flash[:alert] = 'Project not deleted'
     end
     redirect_to projects_path
+  end
+  
+  protected
+  
+  def all_my_projects
+    current_user.projects.where(:archive_flag => false)
+  end
+  
+  def my_project(id)
+    all_my_projects.find id
   end
   
 end

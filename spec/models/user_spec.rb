@@ -40,7 +40,11 @@ describe User do
   
   it "should be able to return all it's projects" do
     @smith.save!
-    5.times{Project.create(:name => 'p1', :description => 'desc', :user_id => @smith.id)}
+    5.times do
+      project = Project.new(:name => 'p1', :description => 'desc')
+      project.user_id = @smith.id
+      project.save!
+    end
     @smith.projects.size.should == 5
   end
   
