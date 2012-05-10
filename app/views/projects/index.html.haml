@@ -8,6 +8,8 @@
   .content         
     %h2.title Projects
     .inner
+      = form_tag projects_path(params), :class => "form", :method => "get" do
+        = text_field_tag :name, params[:name], :class => "text_field"
       %ul.list
         - @projects.each do |project|
           %li
