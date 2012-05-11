@@ -1,0 +1,18 @@
+.flash
+  - if @goal.errors.any?
+    .message.alert
+      %ul
+        - for message in @goal.errors.full_messages
+          %li= message
+.group
+  = f.label :name, :class => :label
+  = f.text_field :name, :class => 'text_field'
+  
+.group
+  = f.label :estimated_time, :class => :label
+  = f.number_field :estimated_time, :class => 'number_field'
+  
+.group.navform.wat-cf
+  %button.button{:type => "submit"}
+    Save
+  = link_to "Cancel", project_goals_path(@project), :class => "text_button_padding link_button"

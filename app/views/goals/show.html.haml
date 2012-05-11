@@ -1,0 +1,28 @@
+.block
+  .secondary-navigation
+    %ul.wat-cf
+      %li.first
+        = link_to "List", project_goals_path(@project)
+      %li
+        = link_to "New", new_project_goal_path(@project)
+      %li.active
+        = link_to "Show", project_goal_path(@project, @goal)
+  .content
+    .inner
+      %p
+        Name:
+        = @goal.name
+      %p
+        Estimated time:
+        = @goal.estimated_time
+      %p
+        Real time:
+        = @goal.real_time
+      %p
+        Accomplished:
+        = @goal.accomplished
+      .wat-cf
+        = link_to "Edit", edit_project_goal_path(@project, @goal), :class => "button"
+        = link_to "Delete", project_goal_path(@project, @goal), :method => "delete", :class => "button", :confirm => "Are you sure?"
+        
+- content_for :sidebar, render(:partial => 'sidebar')

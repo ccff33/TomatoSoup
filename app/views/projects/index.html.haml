@@ -27,6 +27,8 @@
                   = link_to project.name, project_path(project)
               %p
                 = project.description
+              %p
+                = link_to "Manage project goals", project_goals_path(project)
       .actions-bar.wat-cf
         .actions
         = will_paginate @projects, :previous_label => "Prev", :next_label => "Next"

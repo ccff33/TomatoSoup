@@ -6,27 +6,28 @@
     = javascript_include_tag "application"
     = csrf_meta_tag
   %body
-    %div{:id => "container"}
-      %div{:id => "header"}
+    #container
+      #header
         %h1
           = link_to "Tomato Soup", root_path 
-        %div{:id => "user-navigation"}
-          %ul{:class => "wat-cf"}
+        #user-navigation
+          %ul.wat
             - if current_user
               %li= link_to 'Logout', logout_path
             - else
               %li= link_to 'Login', login_path
               %li= link_to 'Register', register_path
-        %div{:id => "main-navigation"}
-      %div{:id => "wrapper", :class => "wat-cf"}
-        %div{:class => "flash"}
+        #main-navigation
+        
+      #wrapper.wat-cf
+        .flash
           - flash.each do |type, message|
             %div{:class => "message #{type}"}
               %p= message
-        %div{:id => "main"}
+        #main
           = yield
-          %div{:id => "footer"}
-            %div{:class => "block"}
+          #footer
+            .block
               %p Copyright &copy;
-        %div{:id => "sidebar"}
+        #sidebar
           = yield :sidebar

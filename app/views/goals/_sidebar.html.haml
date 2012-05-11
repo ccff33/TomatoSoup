@@ -1,0 +1,10 @@
+.block.notice
+  %h3 Navigation
+  .content
+    %ul.navigation
+      %li
+        = link_to "All project goals", project_goals_path(@project)
+      %li
+        = link_to "Add a goal to project", new_project_goal_path(@project)
+      %li
+        = link_to "View project", project_path(@project)
