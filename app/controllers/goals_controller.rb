@@ -50,7 +50,7 @@ class GoalsController < ApplicationController
   protected
   
   def load_project
-    @project = Project.find params[:project_id]
+    @project = current_user.projects.find params[:project_id]
   end
   
 end
