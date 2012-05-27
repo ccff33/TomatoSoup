@@ -5,6 +5,7 @@ class GoalsController < ApplicationController
   
   def index
     @goals = @project.goals
+    @currently_running = session[:goal_id]
   end
   
   def new

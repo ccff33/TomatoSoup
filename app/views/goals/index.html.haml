@@ -27,7 +27,11 @@
             %td= goal.accomplished ? 'Accomplished' : 'Not accomplished'
             %td= goal.estimated_time
             %td= goal.real_time
-            %td start a pomodoro
+            %td
+              - if goal.id != @currently_running
+                = link_to'start a pomodoro', "/pomodoro/#{goal.id}/start"
+              - else
+                = link_to 'running', pomodoro_path
             %td.last
               = link_to "show", [@project, goal]
               |

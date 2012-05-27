@@ -1,0 +1,12 @@
+- if currently_working?
+  %h2
+    Currently working on
+    = @goal.name
+  %h2
+    You have been working
+    = session[:start_time] ? (Time.now - session[:start_time]) / 1.minute : ''
+    minutes
+  %h2
+    I should put a countdown js timer here with pause/resume functionality
+  
+- content_for :sidebar, render(:partial => 'sidebar')

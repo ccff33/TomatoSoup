@@ -1,0 +1,8 @@
+.block.notice
+  %h3 Navigation
+  .content
+    %ul.navigation
+      %li
+        = link_to "Back to goals listing", project_goals_path(@goal.project)
+      %li
+        = link_to "Stop", pomodoro_stop_path

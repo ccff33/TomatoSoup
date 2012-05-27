@@ -15,5 +15,9 @@ TomatoSoup::Application.routes.draw do
     match 'goals' => 'goals#index'
   end
   
+  get 'pomodoro/:goal_id/start' => 'pomodoro#start'
+  get 'pomodoro/stop' => 'pomodoro#stop'
+  get 'pomodoro' => 'pomodoro#index'
+  
   
 end
