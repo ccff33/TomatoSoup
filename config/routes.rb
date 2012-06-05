@@ -11,7 +11,10 @@ TomatoSoup::Application.routes.draw do
   resources :users, :only => [:new, :create]
   resources :sessions, :only => [:new, :create, :destroy]
   resources :projects do
-    resources :goals
+    resources :goals do
+      match 'accomplish' => 'goals#accomplish'
+      match 'unaccomplish' => 'goals#unaccomplish'
+    end
     match 'goals' => 'goals#index'
   end
   

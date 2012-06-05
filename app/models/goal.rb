@@ -3,7 +3,7 @@ class Goal < ActiveRecord::Base
   
   POMODORO_IN_MINUTES = 25.minutes / 1.minute
   
-  attr_accessible :name, :estimated_time
+  attr_accessible :name, :estimated_time, :accomplished
   
   validates :name, :presence => true
   validates :project, :presence => true

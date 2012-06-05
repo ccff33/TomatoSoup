@@ -48,6 +48,18 @@ class GoalsController < ApplicationController
     redirect_to project_goals_path(@project)
   end
   
+  def accomplish
+    @goal = @project.goals.find params[:goal_id]
+    @goal.update_attributes(:accomplished => true)
+    redirect_to project_goals_path(@project)
+  end
+  
+  def unaccomplish
+    @goal = @project.goals.find params[:goal_id]
+    @goal.update_attributes(:accomplished => false)
+    redirect_to project_goals_path(@project)
+  end
+  
   protected
   
   def load_project

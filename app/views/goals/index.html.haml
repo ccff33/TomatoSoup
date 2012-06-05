@@ -24,7 +24,11 @@
             %td= goal.id
             %td= link_to goal.name, [@project, goal]
             %td= goal.created_at
-            %td= goal.accomplished ? 'Accomplished' : 'Not accomplished'
+            %td
+              - if goal.accomplished
+                = link_to 'Accomplished', project_goal_unaccomplish_path(@project, goal)
+              - else
+                = link_to 'Not accomplished', project_goal_accomplish_path(@project, goal)
             %td= goal.estimated_time
             %td= goal.real_time
             %td

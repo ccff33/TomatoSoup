@@ -11,13 +11,16 @@
         %h1
           = link_to "Tomato Soup", root_path 
         #user-navigation
-          %ul.wat
+          %ul.wat-cf
             - if current_user
               %li= link_to 'Logout', logout_path
             - else
               %li= link_to 'Login', login_path
               %li= link_to 'Register', register_path
         #main-navigation
+          %ul.wat-cf
+            - if current_user
+              %li= link_to 'My Projects', projects_path
         
       #wrapper.wat-cf
         .flash
