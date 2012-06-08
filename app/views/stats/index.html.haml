@@ -1,0 +1,23 @@
+.block
+  .content
+    .inner
+      %h2.title OK, here are some interesting stats
+      %table.table
+        %tr
+          %th Stat
+          %th Value
+        %tr
+          %td Total Working Time
+          %td
+            = @total_working_time
+            minutes
+        %tr
+          %td Estimated / Real
+          %td
+            = @estimated_time_to_real_time_ratio_for_goals
+        %tr
+          %td Average Working Time For Projects
+          %td
+            = @average_working_time_for_projects
+            minutes
+- content_for :sidebar, render(:partial => 'sidebar')

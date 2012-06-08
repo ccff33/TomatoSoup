@@ -22,5 +22,7 @@ TomatoSoup::Application.routes.draw do
   get 'pomodoro/stop' => 'pomodoro#stop'
   get 'pomodoro' => 'pomodoro#index'
   
+  get 'stats' => 'stats#index'
+  
   
 end

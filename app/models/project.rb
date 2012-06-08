@@ -23,4 +23,8 @@ class Project < ActiveRecord::Base
              :order => 'created_at desc'
   end
   
+  def self.total_working_time
+    joins(:goals).where("Projects.id = project_id").sum(:real_time, :group => :project_id)
+  end
+  
 end

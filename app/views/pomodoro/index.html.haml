@@ -1,12 +1,50 @@
-- if currently_working?
-  %h2
-    Currently working on
-    = @goal.name
-  %h2
-    You have been working
-    = session[:start_time] ? (Time.now - session[:start_time]) / 1.minute : ''
-    minutes
-  %h2
-    I should put a countdown js timer here with pause/resume functionality
+.block
+  .content
+    .inner
+      %p
+        %center
+          You are currently working on:
+          %b
+            %i= @goal.name
+      %br 
+      %center
+        #timerAndButton
+          #timer
+          %a{:href => '#'}
+            = image_tag 'pause.png', :id => 'pauseButton', :type => 'button'
   
+%script{:type => "text/javascript"}
+  :plain
+    $('#timer').countdown(
+      {until: "+ #{@minutes}m #{@seconds}s", format: "MS", expiryUrl: "/pomodoro/stop"}); 
+ 
+    $('#pauseButton').toggle(function() { 
+        $(this).attr('src', "#{asset_path 'play.png'}"); 
+        $('#timer').countdown('pause'); 
+       }, 
+      function() { 
+        $(this).attr('src', "#{asset_path 'pause.png'}"); 
+        $('#timer').countdown('resume'); 
+      } 
+    );
+    
+%style
+  :plain
+    #timerAndButton {
+      width: 383px;
+      height: 100px;
+    }
+    
+    #timer {
+      float: left;
+      width: 300px;
+      height: 80px;
+      font-size: 30px;
+    }
+    
+    #pauseButton {
+      float: right;
+      margin-top: 0;
+    }
+ 
 - content_for :sidebar, render(:partial => 'sidebar')
