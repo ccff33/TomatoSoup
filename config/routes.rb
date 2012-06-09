@@ -6,9 +6,10 @@ TomatoSoup::Application.routes.draw do
   match 'login' => 'sessions#new'
   match 'logout' => 'sessions#destroy'
   match 'register' => 'users#new'
+  match 'profile' => 'users#edit'
   
   
-  resources :users, :only => [:new, :create]
+  resources :users
   resources :sessions, :only => [:new, :create, :destroy]
   resources :projects do
     resources :goals do

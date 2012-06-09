@@ -6,7 +6,8 @@ class User < ActiveRecord::Base
   validates :username, :presence => true, :uniqueness => true
   validates :first_name, :presence => true
   validates :last_name, :presence => true
-  validates :password, :presence => true, :on => :create, :confirmation => true
+  validates :password, :presence => true, :confirmation => true
   
   has_many :projects
+  
 end
