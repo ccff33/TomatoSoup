@@ -13,13 +13,15 @@ class StatsController < ApplicationController
   def average_working_time_for_projects
     sum = 0
     tmp = current_user.projects.active.total_working_time
-    tmp.each {|row| sum += row[1]}
+    tmp.each {|row| sum += row[1].to_f}
     tmp.count == 0 ? 0 : sum / tmp.count
   end
   
   def estimated_time_to_real_time_ratio_for_goals
     sum = 0;
-    tmp = current_user.projects.active.joins(:goals).sum("estimated_time/(real_time + 0.000001)", :group => "Goals.id")
+    tmp = current_user.projects.active.joins(:goals)
+                        .sum("estimated_time/(real_time)",
+                        :group => "Goals.id", :conditions => "real_time != 0")
     tmp.each {|row| sum += row[1].to_f}
     tmp.count == 0 ? 0 : sum / tmp.count
   end
